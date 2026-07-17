@@ -33,11 +33,43 @@
         flat
         class="q-ml-sm"
       />
-     </div>
-   </q-form>
+      </div>
+    </q-form>
   </div>
 </template>
 
 <script setup>
 //
 </script>
+import { useQuasar } from 'quasar'
+import { ref } from 'vue'
+
+const $q = useQuasar()
+
+const name = ref(null)
+const age = ref(null)
+const accept = ref(false)
+
+function onSubmit() {
+  if (accept.value !== true) {
+    $q.notify({
+      color: 'red-5',
+      textColor: 'white',
+      icon: 'warning',
+      message: 'You need to accept the license and terms first'
+    })
+  } else {
+    $q.notify({
+      color: 'green-4',
+      textColor: 'white',
+      icon: 'cloud_done',
+      message: 'Submitted'
+    })
+  }
+}
+
+function onReset() {
+  name.value = null
+  age.value = null
+  accept.value = false
+}
